@@ -1,0 +1,101 @@
+﻿
+<div class="container" ng-init="loadLeagues()">
+    <div class="row clearfix">
+        <div class="col-md-6 column">
+            <h2>
+                Bienvenido Administrador!
+            </h2>
+        </div>
+        <div class="col-md-6 column">
+            <a class="btn btn-warning" href="/login">Log Out</a>
+        </div>
+    </div>
+    <div class="row clearfix">
+        <div class="col-md-6 column">
+            <dl>
+                <dt>
+                    Esta es la pagina central de Prediliga.
+                </dt>
+                <dd>
+                    Es aqui donde puedes, crear, leer, actualizar, editar y eliminar instancias de ligas, equipos y partidos.
+                </dd>
+                
+            </dl>
+        </div>
+        <div class="col-md-6 column">
+            <img alt="140x140" src="http://lorempixel.com/140/140/" class="img-circle" />
+        </div>
+    </div>
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            #
+                        </th>
+                        <th>
+                            Liga
+                        </th>
+                        <th>
+                            Fecha de Inicio
+                        </th>
+                        <th>
+                            Ubicacion
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="liga in TodasLigas">
+                        <td>{{liga.Id}}</td>
+                        <td><a class="btn-link" href="/configleague/{{liga.Id}}">{{liga.Name}}</a></td>
+                        <td>{{liga.Day}}</td>
+                        <td>{{liga.Location}}</td>
+                        <td>
+                            <a href="" ng-click="editLeague(liga.Id,liga.Name,liga.Day,liga.Location)"><i class=" glyphicon glyphicon-pencil"></i></a>
+                            <a href="" ng-click="deleteLeague(liga.Id)"><i class="glyphicon glyphicon-remove"></i></a>
+                        </td>
+                    </tr>  
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <div class="row" ng-hide="isEditing">
+                <form class="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
+                    <h2 class="text-center">Nueva Liga</h2>
+                    <div class="form-box">
+                        <div class="form-group">
+                            <input ng-model="league.Name" type="text" class="form-control" placeholder="Nombre de Liga" />
+                            <input ng-model="league.Day" type="text" class="form-control" placeholder="Fecha de Inicio" />
+                            <input ng-model="league.Location" type="text" class="form-control" placeholder="Ubicacion" />
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-primary btn-block" ng-click="admin()">Agregar</button>
+                            <button class="btn btn-primary btn-block" ng-click="limpiar()">Limpiar Campos</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="row" ng-show="isEditing">
+                <form class="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
+                    <h2 class="text-center">Editar Liga</h2>
+                    <div class="form-box">
+                        <div class="form-group">
+                            <input ng-model="newleague.Name" type="text" class="form-control" placeholder="Nombre de Liga" />
+                            <input ng-model="newleague.Day" type="text" class="form-control" placeholder="Fecha de Inicio" />
+                            <input ng-model="newleague.Location" type="text" class="form-control" placeholder="Ubicacion" />
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-primary btn-block" ng-click="FinishEditing()">Editar</button>
+                            <button class="btn btn-primary btn-block" ng-click="FinishedEditing()">Limpiar Campos</button>
+                            <button class="btn btn-primary btn-block" ng-click="cancelEdit()">Cancelar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

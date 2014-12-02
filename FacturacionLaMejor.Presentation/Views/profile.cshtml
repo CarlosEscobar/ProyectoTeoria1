@@ -1,0 +1,107 @@
+﻿<div class="container" ng-init="loadLeaguesandUser()" >
+    <div class="row clearfix">
+        <div class="col-md-6 column">
+            <h1 class="text-center text-success">
+                Mis Ligas.
+            </h1>
+        </div>
+        <div class="col-md-6 column">
+            <div class="row clearfix">
+                <div class="col-md-6 column">
+                    <h3>
+                        Bienvenido Usuario
+                    </h3>
+                </div>
+                <div class="col-md-6 column">
+                    <a class="btn btn-lg btn-primary btn-block" href="/login">Log Out</a>
+                    <input value="Load Profile" class="btn btn-primary btn-block btn-lg" ng-click="loadProfile()" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row clearfix">
+        <div class="col-md-6 column">
+            <blockquote>
+                <p>
+                    Haz click sobre el nombre de cualquiera de tus ligas y realiza predicciones de sus partidos.
+                </p>
+            </blockquote>
+        </div>
+        <div class="col-md-6 column">
+            <div class="row clearfix">
+                <div class="col-md-6 column">
+                    <img alt="140x140" src="http://lorempixel.com/140/140/" />
+                </div>
+                <div class="col-md-6 column">
+                    <ul>
+                        <li>
+                            Id: <input ng-model="userId" type="text" />
+                        </li>
+                        <li>
+                            User: <input ng-model="userName" type="text" />
+                        </li>
+                        <li>
+                            Email: <input ng-model="userEmail" type="text" />
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row clearfix">
+        <div class="col-md-6 column">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            ID Liga
+                        </th>
+                        <th>
+                            Nombre
+                        </th>
+                        <th>
+                            Fecha Inicio
+                        </th>
+                        <th>
+                            Ubicacion
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="lig in myLigas">
+                        <td>{{lig.Id}}</td>
+                        <td><a class="btn-link" href="/league/{{lig.Id}}">{{lig.Name}}</a></td>
+                        <td>{{lig.Day}}</td>
+                        <td>{{lig.Location}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-6 column">
+            <h4>
+                Animate! Y busca y registrate a nuevas Ligas.
+            </h4>
+            <div class="input-group">
+                <button class="btn btn-success btn-block" type="button">Buscar</button>
+                <input ng-model="Buscar.Name" type="text" class="form-control" placeholder="Buscar Liga" />
+            </div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>    </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="liga in Ligas | filter:Buscar">
+                        <td>
+                            {{liga.Name}}
+                            <button ng-click="Register(liga.Id)" class="btn btn-warning pull-right">Registrarse</button>
+                        </td>
+
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>

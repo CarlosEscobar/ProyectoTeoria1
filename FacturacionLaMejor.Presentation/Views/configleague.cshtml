@@ -1,0 +1,170 @@
+﻿<div class="container" ng-init="LoadLeague()">
+    <div class="row clearfix">
+        <div class="col-md-4 column">
+            <h1>
+                Liga: <input ng-model="lId" type="text" />
+            </h1>
+        </div>
+        <div class="col-md-4 column">
+            <img alt="140x140" src="http://lorempixel.com/140/140/" class="img-thumbnail" />
+        </div>
+        <div class="col-md-4 column">
+            <a class="btn btn-lg btn-primary" href="/admin">Back</a>
+            <input value="Load League" class="btn btn-primary btn-block btn-lg" ng-click="loadL()" />
+        </div>
+    </div>
+    <div class="row clearfix">
+        <div class="col-md-6 column">
+            <h2>
+                Equipos Enlistados
+            </h2>
+        </div>
+        <div class="col-md-6 column">
+            <h2>
+                Partidos
+            </h2>
+        </div>
+    </div>
+    <div class="row clearfix">
+        <div class="col-md-6 column">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            #
+                        </th>
+                        <th>
+                            Nombre
+                        </th>
+                        <th>
+                            Numero de Jugadores
+                        </th>
+                        <th>
+                            Director Tecnico
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="equipo in myEquipos">
+                        <td>{{equipo.Id}}</td>
+                        <td>{{equipo.Name}}</td>
+                        <td>{{equipo.NumberOfPlayers}}</td>
+                        <td>{{equipo.Coach}}</td>
+                        <td>
+                            <a href="" ng-click="editTeam(equipo.Id, equipo.Name, equipo.NumberOfPlayers, equipo.Coach)"><i class=" glyphicon glyphicon-pencil"></i></a>
+                            <a href="" ng-click="deleteTeam(equipo.Id)"><i class="glyphicon glyphicon-remove"></i></a>
+                        </td>
+                    </tr> 
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-6 column">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            #
+                        </th>
+                        <th>
+                            Equipo 1
+                        </th>
+                        <th>
+                            Vs.
+                        </th>
+                        <th>
+                            Equipo 2
+                        </th>
+                        <th>
+                            Fecha
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="partido in myPartidos">
+                        <td>{{partido.Id}}</td>
+                        <td>{{partido.Team1}}</td>
+                        <td>vs.</td>
+                        <td>{{partido.Team2}}</td>
+                        <td>{{partido.Day}}</td>
+                        <td>
+                            <a href="" ng-click="editGame(partido.Id, partido.Team1, partido.Team2, partido.Day)"><i class=" glyphicon glyphicon-pencil"></i></a>
+                            <a href="" ng-click="deleteGame(partido.Id)"><i class="glyphicon glyphicon-remove"></i></a>
+                        </td>
+                    </tr> 
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row clearfix">
+        <div class="col-md-6 column">
+            <div class="row" ng-hide="isEditing1">
+                <form class="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
+                    <h2 class="text-center">Nuevo Equipo</h2>
+                    <div class="form-box">
+                        <div class="form-group">
+                            <input ng-model="team.Name" type="text" class="form-control" placeholder="Nombre del Equipo" />
+                            <input ng-model="team.NumberOfPlayers" type="text" class="form-control" placeholder="Numero de Jugadores"  />
+                            <input ng-model="team.Coach" type="text" class="form-control" placeholder="Director Tecnico" />
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-primary btn-block" ng-click="addNewTeam()">Agregar</button>
+                            <button class="btn btn-primary btn-block" ng-click="cleanTeam()">Limpiar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="row" ng-show="isEditing1">
+                <form class="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
+                    <h2 class="text-center">Editar Equipo</h2>
+                    <div class="form-box">
+                        <div class="form-group">
+                            <input ng-model="newTeam.Name" type="text" class="form-control" placeholder="Nombre del Equipo" />
+                            <input ng-model="newTeam.NumberOfPlayers" type="text" class="form-control" placeholder="Numero de Jugadores" />
+                            <input ng-model="newTeam.Coach" type="text" class="form-control" placeholder="Director Tecnico" />
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-primary btn-block" ng-click="FinishEditing1()">Editar</button>
+                            <button class="btn btn-primary btn-block" ng-click="FinishedEditing1()">Limpiar Campos</button>
+                            <button class="btn btn-primary btn-block" ng-click="cancelEdit1()">Cancelar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-md-6 column">
+            <div class="row" ng-hide="isEditing2">
+                <form class="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
+                    <h2 class="text-center">Nuevo Juego</h2>
+                    <div class="form-box">
+                        <div class="form-group">
+                            <input ng-model="match.Team1" type="text" class="form-control" placeholder="Equipo 1" />
+                            <input ng-model="match.Team2" type="text" class="form-control" placeholder="Equipo 2" />
+                            <input ng-model="match.Day" type="text" class="form-control" placeholder="Fecha del Partido" />
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-primary btn-block" ng-click="addNewGame()">Agregar</button>
+                            <button class="btn btn-primary btn-block" ng-click="cleanMatch()">Limpiar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="row" ng-show="isEditing2">
+                <form class="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
+                    <h2 class="text-center">Editar Juego</h2>
+                    <div class="form-box">
+                        <div class="form-group">
+                            <input ng-model="newMatch.Team1" type="text" class="form-control" placeholder="Equipo 1" />
+                            <input ng-model="newMatch.Team2" type="text" class="form-control" placeholder="Equipo 2" />
+                            <input ng-model="newMatch.Day" type="text" class="form-control" placeholder="Fecha del Partido" />
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-primary btn-block" ng-click="FinishEditing2()">Editar</button>
+                            <button class="btn btn-primary btn-block" ng-click="FinishedEditing2()">Limpiar Campos</button>
+                            <button class="btn btn-primary btn-block" ng-click="cancelEdit2()">Cancelar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

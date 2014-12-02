@@ -1,0 +1,44 @@
+﻿@{
+    PageData["title"] = "AngularJS SPA | Sign In";
+}
+
+<div class="container" ng-init="loadUsers()">
+    <div class="row clearfix">
+        <div class="col-md-6 column">
+            <img alt="140x140" src="http://lorempixel.com/140/140/" class="img-circle" />
+        </div>
+        <div class="col-md-6 column">
+            <h1>
+                PrediLiga
+            </h1>
+        </div>
+    </div>
+    <div class="row clearfix">
+        <div class="col-md-6 column">
+            <dl>
+                <dt>
+                    Bienvenido a Prediliga!
+                </dt>
+                <dd>
+                    Si eres nuevo en PrediLiga, Registrate Aqui. Es gratis.
+                </dd>
+            </dl> <button class="btn btn-lg btn-primary" type="button" ng-click="register()">RegistrateAqui</button>
+        </div>
+        <div class="col-md-6 column">
+            <form role="form">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">UserName</label><input ng-model="user.Name" type="text" class="form-control" placeholder="Username" required autofocus />
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Password</label><input ng-model="user.Password" type="password" class="form-control" placeholder="Password" required />
+                </div>
+            </form> 
+            <button class="btn btn-success btn-lg btn-block" ng-disabled="!(user.Name && user.Password)" ng-click="login(user.Name,user.Password)">Sign In</button> 
+            <a class="btn btn-success btn-lg btn-block" href="/forgot-password">Forgot Password</a>
+        
+            <div class="alert alert-success" role="alert" ng-show="ShMessage1"> Error: La contraseña para Admin esta incorrecta.</div>
+            <div class="alert alert-success" role="alert" ng-show="ShMessage2"> Error: El Nombre de usuario no aparece registrado. Si eres nuevo registrate ahora.</div>
+            <div class="alert alert-success" role="alert" ng-show="ShMessage3"> Error: La contraseña del Usuario esta incorrecta.</div>
+        </div>
+    </div>
+</div>
