@@ -19,7 +19,7 @@ namespace FacturacionLaMejor.Api
 
         public void Run()
         {
-            MsSqlConfiguration databaseConfiguration = MsSqlConfiguration.MsSql2008.ShowSql().
+            PostgreSQLConfiguration databaseConfiguration = PostgreSQLConfiguration.Standard.ShowSql().
                 ConnectionString(x => x.Is(ConnectionStrings.Get()));
 
             container.Register(c => { return c.Resolve<ISessionFactory>().OpenSession(); }).As

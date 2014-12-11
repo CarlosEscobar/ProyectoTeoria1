@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Threading;
 using AcklenAvenue.Data.NHibernate;
 using DomainDrivenDatabaseDeployer;
 using FacturacionLaMejor.data;
 using FluentNHibernate.Cfg.Db;
 using NHibernate;
+using Npgsql;
 
 namespace FacturacionLaMejor.DataBaseDeployer
 {
@@ -13,11 +15,11 @@ namespace FacturacionLaMejor.DataBaseDeployer
     {
         static void Main(string[] args)
         {
-
+            /*
             string connectionString = ConnectionStrings.Get();
 
             /*  MsSqlConfiguration databaseConfiguration =
-                  MsSqlConfiguration.MsSql2008.ShowSql().ConnectionString(x => x.Is(connectionString));*/
+                  MsSqlConfiguration.MsSql2008.ShowSql().ConnectionString(x => x.Is(connectionString));--
 
             PostgreSQLConfiguration databaseConfiguration =
                PostgreSQLConfiguration.Standard.ShowSql().ConnectionString(x => x.Is(connectionString));
@@ -58,6 +60,23 @@ namespace FacturacionLaMejor.DataBaseDeployer
             sessionFactory.Close();
             Console.WriteLine("");
             Console.WriteLine("Seed data added.");
+            Thread.Sleep(2000);
+            */
+
+            NpgsqlConnection conn = new NpgsqlConnection("Server=localhost;User Id=postgres;Password=clave;Database=PRUEBADIAGRAMA;");
+            conn.Open();
+  
+            // Specify command StoredProcedure
+            NpgsqlCommand command = new NpgsqlCommand("INIT_D(88,'ILNENE')", conn);
+            command.CommandType = CommandType.StoredProcedure;
+
+            // Execute procedure and obtain a result set
+            NpgsqlDataReader dr = command.ExecuteReader();
+
+            conn.Close();
+
+            Console.WriteLine("");
+            Console.WriteLine("INIT D processed.");
             Thread.Sleep(2000);
         }
     }

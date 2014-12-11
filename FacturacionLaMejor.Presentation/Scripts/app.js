@@ -21,6 +21,12 @@ angular.module('app', ['ui.router', 'app.filters', 'app.services', 'app.directiv
                 templateUrl: '/views/about',
                 controller: 'AboutCtrl'
             })
+            .state('LaMayor', {
+                url: '/LaMayor',
+                layout: 'basic',
+                templateUrl: '/views/lamayor',
+                controller: 'LaMayorCtrl'
+            })
             .state('login', {
                 url: '/login',
                 layout: 'basic',

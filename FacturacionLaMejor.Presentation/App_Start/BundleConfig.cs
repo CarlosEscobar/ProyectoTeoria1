@@ -33,6 +33,7 @@ namespace App.FacturacionLaMejor.Presentation
                 "~/scripts/Controllers/ErrorController.js",
                 "~/scripts/Controllers/ForgotPasswordController.js",
                 "~/scripts/Controllers/HomeController.js",
+                "~/scripts/Controllers/LaMayorController.js",
                 "~/scripts/Controllers/LeagueController.js",
                 "~/scripts/Controllers/LoginController.js",
                 "~/scripts/Controllers/ProfileController.js",
